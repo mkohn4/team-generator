@@ -230,6 +230,7 @@ const nextEmployee = function () {
                 internFunc();
             } else {
                 console.log(teamArray);
+                //buildTeam();
             }
         })
 }
