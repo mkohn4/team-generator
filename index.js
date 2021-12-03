@@ -229,14 +229,14 @@ const nextEmployee = function () {
             } else if (employeeChoice === 'Intern') {
                 internFunc();
             } else {
-                console.log('buildTeam()');
+                console.log(teamArray);
             }
         })
 }
 
 const buildTeam = function () {
     //use .filter to filter the array to find manager,engineer,intern from getRole() to create 3 separate arrays for each type of employee
-    //use .map to take the existing array of manager, intern, and engineer
+    //use .map to take the existing array of manager, intern, and engineer because you need to have different cards for different values
         /*engineerArray.map(engineer => {
             //create template literals with bootsrap card html
             //should be an instance of each key/value in the object (ie: ${engineer.name})
