@@ -1,9 +1,10 @@
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const inquirer = require('inquirer');
 const teamArray = [];
 
-managerFunc = function () {
+const managerFunc = function () {
 
     return inquirer.prompt ([
         {
@@ -60,7 +61,7 @@ managerFunc = function () {
     ])
     .then(managerAnswers => {
         console.log(managerAnswers);
-        //deconstruct object
+        //deconstruct object to set variables in here equal to dot notation (const name = managerAnswer.name, const email = managerAnswer.email, etc.)
         const {name,id,email,officeNumber} = managerAnswers;
         //set manager var as new instance of Manager object with answers provided
         const manager = new Manager(name,id,email,officeNumber);
@@ -72,7 +73,7 @@ managerFunc = function () {
     })
 };
 
-engineerFunc = function () {
+const engineerFunc = function () {
 
     return inquirer.prompt ([
         {
@@ -140,7 +141,7 @@ engineerFunc = function () {
     })
 };
 
-internFunc = function () {
+const internFunc = function () {
 
     return inquirer.prompt ([
         {
@@ -224,25 +225,79 @@ const nextEmployee = function () {
                 }
             }
         }]).then(employeeChoice => {
-            if(employeeChoice === 'Engineer') {
+            console.log(employeeChoice);
+            if(employeeChoice.role === 'Engineer') {
+                console.log('engineer');
                 engineerFunc();
-            } else if (employeeChoice === 'Intern') {
+            } else if (employeeChoice.role === 'Intern') {
+                console.log('intern');
                 internFunc();
             } else {
-                console.log(teamArray);
-                //buildTeam();
+                //console.log('show all team members');
+                //console.log(teamArray);
+                buildTeam();
             }
         })
 }
 
 const buildTeam = function () {
     //use .filter to filter the array to find manager,engineer,intern from getRole() to create 3 separate arrays for each type of employee
+    const managerArray = teamArray.filter(currentElement => currentElement.getRole() === 'Manager');
+    const engineerArray = teamArray.filter(currentElement => currentElement.getRole() === 'Engineer');
+    const internArray = teamArray.filter(currentElement => currentElement.getRole() === 'Intern');
+    console.log(managerArray);
     //use .map to take the existing array of manager, intern, and engineer because you need to have different cards for different values
-        /*engineerArray.map(engineer => {
+        engineerArray.map(engineer => {
             //create template literals with bootsrap card html
             //should be an instance of each key/value in the object (ie: ${engineer.name})
-            return 'template literal html with variable values above'
-        })*/
+            return `
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${engineer.getName()}</h5>
+              <p class="card-text">${engineer.getRole()}</p>
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Employee ID: ${engineer.getId()}</li>
+                    <li class="list-group-item">Github: <a href="https://www.github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
+                </ul>
+                <a href="mailto:${engineer.getEmail()}" class="btn btn-primary">Email Me! @ ${engineer.getEmail()}</a>
+          </div>
+          `
+        })
+        managerArray.map(manager => {
+            //create template literals with bootsrap card html
+            //should be an instance of each key/value in the object (ie: ${engineer.name})
+            return `
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${manager.getName()}</h5>
+              <p class="card-text">${manager.getRole()}</p>
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Employee ID: ${manager.getId()}</li>
+                    <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
+                </ul>
+                <a href="mailto:${manager.getEmail()}" class="btn btn-primary">Email Me! @ ${manager.getEmail()}</a>
+          </div>
+          `
+        })
+        internArray.map(intern => {
+            //create template literals with bootsrap card html
+            //should be an instance of each key/value in the object (ie: ${engineer.name})
+            return `
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${intern.getName()}</h5>
+              <p class="card-text">${intern.getRole()}</p>
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Employee ID: ${intern.getId()}</li>
+                    <li class="list-group-item">School: ${intern.getSchool()}</li>
+                </ul>
+                <a href="mailto:${intern.getEmail()}" class="btn btn-primary">Email Me! @ ${intern.getEmail()}</a>
+          </div>
+          `
+        })
         //then, join("") all engineer cards to make all template literal cards for the engineers one template of cards
         //then join("") all engineers, manager, and interns
         //then insert all into the HTML template
