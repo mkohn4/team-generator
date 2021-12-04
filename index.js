@@ -10,8 +10,8 @@ managerFunc = function () {
             type: 'input',
             name: 'name',
             message: 'What is the Manager name? (Required)',
-            validate: id => {
-                if (id) {
+            validate: name => {
+                if (name) {
                     return true;
                 } else {
                     console.log('Enter the Manager name!');
