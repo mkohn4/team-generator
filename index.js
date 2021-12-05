@@ -263,7 +263,7 @@ const buildTeam = () => {
       </div>
       `
     })
-    //managersHTML.join("");
+    managersHTML.join("");
     //console.log(managersHTML);
 
     const engineerArray = teamArray.filter(currentElement => currentElement.getRole() === 'Engineer');
@@ -317,6 +317,7 @@ const buildTeam = () => {
         //}
         //concatenate all html array values together
         const teamHTML = managersHTML.concat(engineersHTML, internsHTML);
+
         //pass team html back
         //then, join("") all engineer cards to make all template literal cards for the engineers one template of cards
         //then join("") all engineers, manager, and interns
