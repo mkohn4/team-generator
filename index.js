@@ -2,7 +2,9 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
+const {writeFile, markup} = require('./lib/templates.js');
 const teamArray = [];
+
 
 const managerFunc = function () {
 
@@ -240,7 +242,7 @@ const nextEmployee = function () {
         })
 }
 
-const buildTeam = function () {
+const buildTeam = () => {
     //use .filter to filter the array to find manager,engineer,intern from getRole() to create 3 separate arrays for each type of employee
     //console.log(managerArray);
     const managerArray = teamArray.filter(currentElement => currentElement.getRole() === 'Manager');
@@ -260,15 +262,15 @@ const buildTeam = function () {
             <a href="mailto:${manager.getEmail()}" class="btn btn-primary">Email Me! @ ${manager.getEmail()}</a>
       </div>
       `
-    });
-    managersHTML.join("");
-    console.log(managersHTML);
+    })
+    //managersHTML.join("");
+    //console.log(managersHTML);
 
     const engineerArray = teamArray.filter(currentElement => currentElement.getRole() === 'Engineer');
     //if engineers exist
-    if (engineerArray.length >0) {
+    //if (engineerArray.length >0) {
         //use .map to take the existing array of manager, intern, and engineer because you need to have different cards for different values
-        const engineersHTML = engineerArray.map(engineer => {
+         const engineersHTML = engineerArray.map(engineer => {
             //create template literals with bootsrap card html
             //should be an instance of each key/value in the object (ie: ${engineer.name})
             return `
@@ -284,15 +286,15 @@ const buildTeam = function () {
                 <a href="mailto:${engineer.getEmail()}" class="btn btn-primary">Email Me! @ ${engineer.getEmail()}</a>
         </div>
         `
-        });
+        })
         //join html together
         engineersHTML.join("");
-        console.log(engineersHTML);
-    }
+        //console.log(engineersHTML);
+    //}
 
         const internArray = teamArray.filter(currentElement => currentElement.getRole() === 'Intern');
         //if interns exist
-        if(internArray.length>0) {
+        //if(internArray.length>0) {
             const internsHTML = internArray.map(intern => {
                 //create template literals with bootsrap card html
                 //should be an instance of each key/value in the object (ie: ${engineer.name})
@@ -311,13 +313,15 @@ const buildTeam = function () {
               `
             });
             internsHTML.join("");
-            console.log(internsHTML);
-        }
-
+            //console.log(internsHTML);
+        //}
+        //concatenate all html array values together
+        const teamHTML = managersHTML.concat(engineersHTML, internsHTML);
+        //pass team html back
         //then, join("") all engineer cards to make all template literal cards for the engineers one template of cards
         //then join("") all engineers, manager, and interns
         //then insert all into the HTML template
-        
+        writeFile(markup(teamHTML));
     
 }
 
