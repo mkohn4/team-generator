@@ -17,6 +17,8 @@
 
 The Team Generator takes inputs for a manager and their employees to create an HTML output showcasing a chart of all employees on the team
 
+Quick Video Showcasing Functionality in Command Line: https://watch.screencastify.com/v/ZpDmYT9OFyqLJ3TkZOwB
+
 ## Installation
 
 Git pull the folder and install node and all dependencies

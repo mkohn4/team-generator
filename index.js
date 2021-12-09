@@ -317,9 +317,13 @@ const buildTeam = () => {
         //}
         //concatenate all html array values together
         const teamHTML = managersHTML.concat(engineersHTML, internsHTML);
-        console.log(teamHTML);
+        //console.log(teamHTML);
         teamHTML.join('');
-        console.log(teamHTML);
+        //CANT FIGURE OUT WHY .JOIN() ISNT JOINING THE TEMPLATE LITERALS TOGETHER AS ONE STRING
+        /*const stringHTML = teamHTML.toString()
+        console.log(stringHTML);
+        stringHTML.replace([,], '');
+        console.log(stringHTML);*/
         //pass team html back
         //then, join("") all engineer cards to make all template literal cards for the engineers one template of cards
         //then join("") all engineers, manager, and interns
