@@ -263,8 +263,8 @@ const buildTeam = () => {
       </div>
       `
     })
-    managersHTML.join('');
-    //console.log(managersHTML);
+    managersHTML.toString();
+    console.log('manager: ' + managersHTML);
 
     const engineerArray = teamArray.filter(currentElement => currentElement.getRole() === 'Engineer');
     //if engineers exist
@@ -288,7 +288,8 @@ const buildTeam = () => {
         `
         })
         //join html together
-        engineersHTML.join('');
+        engineersHTML.toString();
+        console.log('engineer'+engineersHTML);
         //console.log(engineersHTML);
     //}
 
@@ -312,13 +313,18 @@ const buildTeam = () => {
               </div>
               `
             });
-            internsHTML.join('');
+            internsHTML.toString();
+            console.log('intern'+ internsHTML);
             //console.log(internsHTML);
         //}
         //concatenate all html array values together
-        const teamHTML = managersHTML.concat(engineersHTML, internsHTML);
-        //console.log(teamHTML);
-        teamHTML.join('');
+        let teamHTML = managersHTML + engineersHTML + internsHTML;
+        // teamHTML = teamHTML.concat(managersHTML,engineersHTML, internsHTML);
+        // console.log('Array', teamHTML);
+        // teamHTML.join('');
+        console.log('team ' + teamHTML);
+        // teamHTML.map
+
         //CANT FIGURE OUT WHY .JOIN() ISNT JOINING THE TEMPLATE LITERALS TOGETHER AS ONE STRING
         /*const stringHTML = teamHTML.toString()
         console.log(stringHTML);
